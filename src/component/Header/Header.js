@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../usercontext/UserContext";
 
 const Header = () => {
+  const { user, SignOut } = useContext(AuthContext);
   return (
     <div className=" mt-4 ">
       <Navbar bg="dark" variant="dark">
@@ -22,17 +24,32 @@ const Header = () => {
                 Home
               </Link>{" "}
             </Nav.Link>
-            <Nav.Link href="#features">
-              <Link className="text-decoration-none" to={"/login"}>
-                Login
-              </Link>
-            </Nav.Link>
-            <Nav.Link href="#pricing">
-              {" "}
-              <Link className="text-decoration-none" to={"/registration"}>
-                Registration
-              </Link>{" "}
-            </Nav.Link>
+
+            {user?.uid ? (
+              <>
+                <Nav.Link>
+                  {" "}
+                  <Link onClick={SignOut} to="/login">
+                    LOGOUT
+                  </Link>
+                </Nav.Link>
+                <h4 className="text-white">{user.email}</h4>
+              </>
+            ) : (
+              <>
+                <Nav.Link>
+                  <Link className="text-decoration-none" to={"/registration"}>
+                    Registration
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  {" "}
+                  <Link className="text-decoration-none" to={"/login"}>
+                    Login
+                  </Link>
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </Container>
       </Navbar>

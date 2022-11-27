@@ -1,4 +1,3 @@
-import React from "react";
 import Booking from "../Booking/Booking";
 import Room from "../Room/Room";
 

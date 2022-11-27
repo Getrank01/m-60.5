@@ -17,12 +17,11 @@ const Room = () => {
   const handleBooking = (room) => {
     const newbooking = [...booking, room];
     setbooking(newbooking);
-    console.log(newbooking);
   };
 
   return (
     <div className="displayall">
-      <div className=" allroom mt-4 mb-4">
+      <div className="   allroom mt-4 mb-4">
         {rooms.map((room) => (
           <RoomView
             room={room}
@@ -31,7 +30,9 @@ const Room = () => {
           ></RoomView>
         ))}
       </div>
-      <Booking booking={booking}></Booking>
+      <div className="book bg-dark">
+        <Booking booking={booking}></Booking>
+      </div>
     </div>
   );
 };
